@@ -20,7 +20,11 @@ trait CollectibleTrait
     /**
      * This item's Amazon Standard Identification Number (ASIN).
      *
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\Length(
+     *     min=10,
+     *     max=10
+     * )
      */
     private $asin;
 
