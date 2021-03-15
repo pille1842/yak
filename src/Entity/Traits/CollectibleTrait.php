@@ -196,48 +196,48 @@ trait CollectibleTrait
         return $this;
     }
 
-    public function getReturnUntil(): ?\DateTime
+    public function getReturnUntil(): ?\DateTimeInterface
     {
         return $this->returnUntil;
     }
 
-    public function setReturnUntil(?\DateTime $returnUntil): self
+    public function setReturnUntil(?\DateTimeInterface $returnUntil): self
     {
         $this->returnUntil = $returnUntil;
 
         return $this;
     }
 
-    public function getRentedAt(): ?\DateTime
+    public function getRentedAt(): ?\DateTimeInterface
     {
         return $this->rentedAt;
     }
 
-    public function setRentedAt(?\DateTime $rentedAt): self
+    public function setRentedAt(?\DateTimeInterface $rentedAt): self
     {
         $this->rentedAt = $rentedAt;
 
         return $this;
     }
 
-    public function getLentAt(): ?\DateTime
+    public function getLentAt(): ?\DateTimeInterface
     {
         return $this->lentAt;
     }
 
-    public function setLentAt(?\DateTime $lentAt): self
+    public function setLentAt(?\DateTimeInterface $lentAt): self
     {
         $this->lentAt = $lentAt;
 
         return $this;
     }
 
-    public function getAddedAt(): \DateTime
+    public function getAddedAt(): \DateTimeInterface
     {
         return $this->addedAt;
     }
 
-    public function setAddedAt(\DateTime $addedAt): self
+    public function setAddedAt(\DateTimeInterface $addedAt): self
     {
         $this->addedAt = $addedAt;
 
