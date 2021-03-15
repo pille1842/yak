@@ -44,12 +44,16 @@ class Book
     private $isbn;
 
     /**
+     * The collection this book belongs to.
+     *
      * @ORM\ManyToOne(targetEntity=ItemCollection::class, inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
      */
     private $collection;
 
     /**
+     * The authors who wrote this book.
+     *
      * @ORM\ManyToMany(targetEntity=Person::class, inversedBy="books")
      */
     private $authors;
