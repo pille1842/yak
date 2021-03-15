@@ -18,6 +18,13 @@ trait CollectibleTrait
     private $description;
 
     /**
+     * This item's Amazon Standard Identification Number (ASIN).
+     *
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $asin;
+
+    /**
      * A rating of this item (between 0 and 5).
      *
      * @ORM\Column(type="smallint", nullable=true)
@@ -101,6 +108,18 @@ trait CollectibleTrait
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAsin(): ?string
+    {
+        return $this->asin;
+    }
+
+    public function setAsin(?string $asin): self
+    {
+        $this->asin = $asin;
 
         return $this;
     }
