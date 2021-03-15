@@ -46,10 +46,16 @@ class ItemCollection
      */
     private $books;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Movie::class, mappedBy="collection")
+     */
+    private $movies;
+
     public function __construct()
     {
         $this->owners = new ArrayCollection();
         $this->books = new ArrayCollection();
+        $this->movies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,6 +147,36 @@ class ItemCollection
             // set the owning side to null (unless already changed)
             if ($book->getCollection() === $this) {
                 $book->setCollection(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Movie[]
+     */
+    public function getMovies(): Collection
+    {
+        return $this->movies;
+    }
+
+    public function addMovie(Movie $movie): self
+    {
+        if (!$this->movies->contains($movie)) {
+            $this->movies[] = $movie;
+            $movie->setCollection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMovie(Movie $movie): self
+    {
+        if ($this->movies->removeElement($movie)) {
+            // set the owning side to null (unless already changed)
+            if ($movie->getCollection() === $this) {
+                $movie->setCollection(null);
             }
         }
 

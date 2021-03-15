@@ -41,9 +41,21 @@ class Person
      */
     private $books;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Movie::class, mappedBy="director")
+     */
+    private $moviesdirected;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Movie::class, mappedBy="actors")
+     */
+    private $moviesplayed;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
+        $this->moviesdirected = new ArrayCollection();
+        $this->moviesplayed = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +121,63 @@ class Person
     {
         if ($this->books->removeElement($book)) {
             $book->removeAuthor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Movie[]
+     */
+    public function getMoviesdirected(): Collection
+    {
+        return $this->moviesdirected;
+    }
+
+    public function addMoviesdirected(Movie $moviesdirected): self
+    {
+        if (!$this->moviesdirected->contains($moviesdirected)) {
+            $this->moviesdirected[] = $moviesdirected;
+            $moviesdirected->setDirector($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMoviesdirected(Movie $moviesdirected): self
+    {
+        if ($this->moviesdirected->removeElement($moviesdirected)) {
+            // set the owning side to null (unless already changed)
+            if ($moviesdirected->getDirector() === $this) {
+                $moviesdirected->setDirector(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Movie[]
+     */
+    public function getMoviesplayed(): Collection
+    {
+        return $this->moviesplayed;
+    }
+
+    public function addMoviesplayed(Movie $moviesplayed): self
+    {
+        if (!$this->moviesplayed->contains($moviesplayed)) {
+            $this->moviesplayed[] = $moviesplayed;
+            $moviesplayed->addActor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMoviesplayed(Movie $moviesplayed): self
+    {
+        if ($this->moviesplayed->removeElement($moviesplayed)) {
+            $moviesplayed->removeActor($this);
         }
 
         return $this;
