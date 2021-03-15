@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ItemCollection;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -37,7 +38,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Collection::class, mappedBy="owners")
+     * @ORM\ManyToMany(targetEntity=ItemCollection::class, mappedBy="owners")
      */
     private $collections;
 
@@ -123,14 +124,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Collection[]
+     * @return Collection|ItemCollection[]
      */
     public function getCollections(): Collection
     {
         return $this->collections;
     }
 
-    public function addCollection(Collection $collection): self
+    public function addCollection(ItemCollection $collection): self
     {
         if (!$this->collections->contains($collection)) {
             $this->collections[] = $collection;
@@ -140,7 +141,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeCollection(Collection $collection): self
+    public function removeCollection(ItemCollection $collection): self
     {
         if ($this->collections->removeElement($collection)) {
             $collection->removeOwner($this);
