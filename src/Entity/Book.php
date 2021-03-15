@@ -41,6 +41,12 @@ class Book
      */
     private $isbn;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ItemCollection::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $collection;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,6 +72,18 @@ class Book
     public function setIsbn(?string $isbn): self
     {
         $this->isbn = $isbn;
+
+        return $this;
+    }
+
+    public function getCollection(): ?ItemCollection
+    {
+        return $this->collection;
+    }
+
+    public function setCollection(?ItemCollection $collection): self
+    {
+        $this->collection = $collection;
 
         return $this;
     }
