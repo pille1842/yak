@@ -21,6 +21,10 @@ class AuthenticationTest extends ApiTestCase
         $manager->persist($user);
         $manager->flush();
 
+        // test not authorized
+        $client->request('GET', '/api/books');
+        $this->assertResponseStatusCodeSame(401);
+
         // retrieve a token
         $response = $client->request('POST', '/authentication_token', [
             'headers' => ['Content-Type' => 'application/json'],
@@ -34,12 +38,8 @@ class AuthenticationTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertArrayHasKey('token', $json);
 
-        // test not authorized
-        $client->request('GET', '/api/books');
-        $this->assertResponseStatusCodeSame(401);
-
         // test authorized
-        $client->request('GET', '/api/books', ['auth_bearer' => $json['token']]);
+        $client->request('GET', '/api/books');
         $this->assertResponseIsSuccessful();
     }
 }
