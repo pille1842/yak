@@ -150,12 +150,12 @@ class Movie
         return $this;
     }
 
-    public function getCollection(): ItemCollection
+    public function getCollection(): ?ItemCollection
     {
         return $this->collection;
     }
 
-    public function setCollection(ItemCollection $collection): self
+    public function setCollection(?ItemCollection $collection): self
     {
         $this->collection = $collection;
 
