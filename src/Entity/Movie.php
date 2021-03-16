@@ -18,7 +18,7 @@ class Movie
     use CollectibleTrait;
 
     /**
-     * This movie's unqiue ID.
+     * This movie's unique ID.
      *
      * @ORM\Id
      * @ORM\GeneratedValue
