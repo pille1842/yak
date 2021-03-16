@@ -15,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ItemCollection
 {
     /**
+     * This collection's unique ID.
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -22,31 +24,43 @@ class ItemCollection
     private $id;
 
     /**
+     * A name for this collection.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * A detailed description of this collection.
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
+     * Can this collection be viewed by anyone?
+     *
      * @ORM\Column(type="boolean")
      */
     private $isPublic;
 
     /**
+     * The owner(s) of this collection.
+     *
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="collections")
      */
     private $owners;
 
     /**
+     * All the books that belong to this collection.
+     *
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="collection", orphanRemoval=true)
      */
     private $books;
 
     /**
+     * All the movies that belong to this collection.
+     *
      * @ORM\OneToMany(targetEntity=Movie::class, mappedBy="collection")
      */
     private $movies;
