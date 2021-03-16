@@ -11,7 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={"security"="is_granted('READ', object)"}
+ * )
  * @ORM\Entity(repositoryClass=BookRepository::class)
  */
 class Book
